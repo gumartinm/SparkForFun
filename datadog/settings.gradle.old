@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url "https://dl.bintray.com/ngbinh/maven"
+        }
+    }
+}
+
+rootProject.name = 'example-spark-datadog-sink'
