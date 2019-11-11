@@ -3,6 +3,7 @@ package de.example.playground.spark.atlas.local
 
 import de.example.playground.commons.test.spark.SharedSparkSessionHelper
 import de.example.playground.spark.atlas.local.SparkAtlasListenersTest._
+
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
@@ -15,8 +16,8 @@ private object SparkAtlasListenersTest {
   val NameColumnLuthienValue = "Lúthien"
   val ConditionExprFirstDataFrame = s"df = '$PartitionColumnFirstValue'"
   val conditionExprSecondDataFrame = s"df = '$PartitionColumnSecondValue'"
-  val DbName = "db_name"
-  val TableName = "table_name"
+  val DbName = "gustavo"
+  val TableName = "example"
   val PartitionColumnName = "df"
   val OriginPartitionColumnName = "df_origin"
   val SurNameColumnName = "surname"
@@ -35,39 +36,33 @@ class SparkAtlasListenersTest extends SharedSparkSessionHelper {
   }
 
   it should "create table Hive with Spark" in {
-    val dbName = "gustavo"
-    val tableName = "example"
     val schema = "gustavo string, years bigint"
-    val createDatabaseStatement = s"CREATE DATABASE IF NOT EXISTS $dbName"
     val createTableStatement =
-      s"CREATE TABLE IF NOT EXISTS $dbName.$tableName " +
+      s"CREATE TABLE IF NOT EXISTS $DbName.$TableName " +
         s"($schema) " +
         "USING JSON " +
-        "LOCATION 'file:/home/gustavo/git/GITHOME/JavaForFun2/Scala/Spark/integration-tests/testOutput' " +
+        s"LOCATION '$path' " +
         "PARTITIONED BY (years) "
 
 
-    spark.sql(createDatabaseStatement)
+    spark.sql(CreateDatabaseSqlStatement)
     spark.sql(createTableStatement)
 
   }
 
   ignore should "create table Hive with succes" in {
-    val dbName = "gustavo"
-    val tableName = "example"
     val schema = "gustavo string, years bigint"
-    val createDatabaseStatement = s"CREATE DATABASE IF NOT EXISTS $dbName"
     val createTableStatement =
-      s"CREATE TABLE IF NOT EXISTS $dbName.$tableName " +
+      s"CREATE TABLE IF NOT EXISTS $DbName.$TableName " +
         s"($schema) " +
-        s"USING HIVE " +
-        s"OPTIONS " +
-        s"( " +
-        s"'serde' 'org.apache.hive.hcatalog.data.JsonSerDe', " +
-        s"'path' 'file:/home/gustavo/git/GITHOME/JavaForFun2/Scala/Spark/integration-tests/testOutput' " +
-        s" ) "
+        "USING HIVE " +
+        "OPTIONS " +
+        "( " +
+        "'serde' 'org.apache.hive.hcatalog.data.JsonSerDe', " +
+        s"'path' '$path' " +
+        " ) "
 
-    spark.sql(createDatabaseStatement)
+    spark.sql(CreateDatabaseSqlStatement)
     spark.sql(createTableStatement)
 
   }
