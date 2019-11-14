@@ -3,7 +3,6 @@ package de.example.playground.spark.atlas.local
 
 import de.example.playground.commons.test.spark.SharedSparkSessionHelper
 import de.example.playground.spark.atlas.local.SparkAtlasListenersTest._
-
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
@@ -24,6 +23,7 @@ private object SparkAtlasListenersTest {
   val NameColumnName = "name"
   val FatherColumnName = "father"
   val CreateDatabaseSqlStatement = s"CREATE DATABASE IF NOT EXISTS $DbName"
+  val WaitForSparkAtlasConnector = 10000
 }
 
 class SparkAtlasListenersTest extends SharedSparkSessionHelper {
@@ -48,6 +48,8 @@ class SparkAtlasListenersTest extends SharedSparkSessionHelper {
     spark.sql(CreateDatabaseSqlStatement)
     spark.sql(createTableStatement)
 
+    // Giving time to SparkAtlasEventTracker for sending events because it has its own background threads.
+    Thread.sleep(WaitForSparkAtlasConnector)
   }
 
   ignore should "create table Hive with succes" in {
