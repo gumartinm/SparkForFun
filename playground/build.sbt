@@ -3,12 +3,13 @@ ThisBuild / organization := "de.example.playground"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 name := "playground"
 
-val sparkVersion = "2.4.0"
+val sparkVersion = "2.3.2"
 
 
 val commonsProjectName = "playground-commons"
 lazy val commonsProject = (project in file(commonsProjectName))
   .withId(commonsProjectName)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
   .settings(
     name := commonsProjectName,
     organization := "de.example.playground.commons",
@@ -20,6 +21,7 @@ lazy val commonsProject = (project in file(commonsProjectName))
 val sparkHiveProjectName = "playground-spark-hive"
 lazy val sparkHiveProject = (project in file(sparkHiveProjectName))
   .withId(sparkHiveProjectName)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
   .settings(
     name := sparkHiveProjectName,
     organization := "de.example.playground.spark.hive",
@@ -34,6 +36,7 @@ lazy val sparkHiveProject = (project in file(sparkHiveProjectName))
 val sparkKafkaProjectName = "playground-spark-kafka"
 lazy val sparkKafkaProject = (project in file(sparkKafkaProjectName))
   .withId(sparkKafkaProjectName)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
   .settings(
     name := sparkKafkaProjectName,
     organization := "de.example.playground.spark.kafka",
@@ -51,6 +54,7 @@ lazy val sparkKafkaProject = (project in file(sparkKafkaProjectName))
 val sparkAtlasProjectName = "playground-spark-atlas"
 lazy val sparkAtlasProject = (project in file(sparkAtlasProjectName))
   .withId(sparkAtlasProjectName)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
   .settings(
     name := sparkAtlasProjectName,
     organization := "de.example.playground.spark.atlas",
@@ -69,6 +73,29 @@ lazy val sparkAtlasProject = (project in file(sparkAtlasProjectName))
     commonsProject,
     commonsProject % "compile->compile;test->test"
   )
+
+val sparkRangerProjectName = "playground-spark-ranger"
+lazy val sparkRangerProject = (project in file(sparkRangerProjectName))
+  .withId(sparkRangerProjectName)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
+  .settings(
+    name := sparkRangerProjectName,
+    organization := "de.example.playground.spark.ranger",
+    settings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      // Spark Authorizer (local build)
+      "yaooqinn" % "spark-authorizer" % "2.1.1" intransitive(),
+      "org.apache.ranger" % "ranger-hive-plugin" % "1.2.0" intransitive(),
+      "org.apache.ranger" % "ranger-plugins-common" % "1.2.0" intransitive(),
+      "org.apache.ranger" % "ranger-plugins-audit" % "1.2.0" intransitive(),
+      "org.apache.httpcomponents" % "httpcore" % "4.4.6" intransitive()
+    )
+  )
+  .dependsOn(
+    commonsProject,
+    commonsProject % "compile->compile;test->test"
+  )
+
 
 lazy val commonDependencies = Seq(
   // Hortonworks Atlas Connector
@@ -106,5 +133,6 @@ lazy val scalaStyleSettings =
   )
 
 lazy val commonSettings = Seq(
-  resolvers += Resolver.mavenLocal
+  resolvers += Resolver.mavenLocal,
+  git.useGitDescribe := true
 )

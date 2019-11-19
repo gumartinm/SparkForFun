@@ -1,0 +1,11 @@
+## Comands
+
+docker build -t apache-ranger-builder builder/
+
+docker build -t apache-ranger .
+
+docker run --privileged --hostname apache-ranger --name apache-ranger -p6080:6080 -p6182:6182 -p6083:6083 -p5432:5432 -it apache-ranger
+
+docker start apache-ranger
+
+docker exec -it apache-ranger /bin/bash
