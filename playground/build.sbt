@@ -139,7 +139,7 @@ lazy val commonSettings = Seq(
   // Testing
   testForkedParallel in Test := false,
   testForkedParallel in IntegrationTest := false,
-  // Always for in Test := true, otherwise tests run in the same process as sbt-launcher and
+  // Always use in Test := true, otherwise tests run in the same process as sbt-launcher and
   // sometimes there are classpath problems because of it :(
   fork in Test := true,
   parallelExecution in Test := false
