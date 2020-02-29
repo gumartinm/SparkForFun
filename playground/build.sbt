@@ -134,6 +134,7 @@ lazy val scalaStyleSettings =
 
 lazy val commonSettings = Seq(
   resolvers += Resolver.mavenLocal,
+  resolvers += "Spring Plugins" at "https://repo.spring.io/plugins-release/",
   git.useGitDescribe := true,
   // Testing
   testForkedParallel in Test := false,
