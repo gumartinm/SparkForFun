@@ -1,0 +1,11 @@
+Listar todas las tasks:
+sbt "tasks -vvvvv"
+
+Para ver el arbol de dependencias:
+sbt "show dependencyTree"
+
+Para ver dependencias (a veces dependencyTree no es suficiente):
+sbt "show update"
+
+Compilar y ejecutar tests:
+sbt compile test
