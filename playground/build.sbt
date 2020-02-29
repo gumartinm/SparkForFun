@@ -134,5 +134,12 @@ lazy val scalaStyleSettings =
 
 lazy val commonSettings = Seq(
   resolvers += Resolver.mavenLocal,
-  git.useGitDescribe := true
+  git.useGitDescribe := true,
+  // Testing
+  testForkedParallel in Test := false,
+  testForkedParallel in IntegrationTest := false,
+  // Always for in Test := true, otherwise tests run in the same process as sbt-launcher and
+  // sometimes there are classpath problems because of it :(
+  fork in Test := true,
+  parallelExecution in Test := false
 )
