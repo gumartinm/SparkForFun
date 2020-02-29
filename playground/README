@@ -9,3 +9,9 @@ sbt "show dependencyUpdate"
 
 Compilar y ejecutar tests:
 sbt compile test
+
+A veces, para que se bejen bien las dependencias necesitamos hacer un update porque la task compile no se entera de que por ejemplo algo en .m2 ha cambiado y no intenta bajarlo otra vez
+sbt update
+
+Ver el classpath de test:
+sbt "show test:fullClasspath"
