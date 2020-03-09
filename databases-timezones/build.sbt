@@ -20,6 +20,22 @@ lazy val sparkHiveProject = (project in file(sparkHiveProjectName))
     )
   )
 
+
+val oracleProjectName = "databases-timezones-oracle"
+lazy val oracleProject = (project in file(oracleProjectName))
+  .withId(oracleProjectName)
+  .enablePlugins(GitVersioning, GitBranchPrompt)
+  .settings(
+    name := oracleProjectName,
+    organization := "de.example.databases.timezones.oracle",
+    settings,
+    libraryDependencies ++= commonDependencies ++ Seq(
+      // Oracle: you must unseale the jar (edit MANIFEST file)
+      "com.oracle" % "ojdbc6unsealed" % "11.2.0.3"  % Provided
+    )
+  )
+
+
 lazy val commonDependencies = Seq(
   // Logging
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0",
