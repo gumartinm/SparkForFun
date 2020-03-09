@@ -12,7 +12,8 @@ class TimeZonedSQLServerDriver extends Driver {
   val delegate = new SQLServerDriver()
 
   override def connect(url: String, properties: Properties): Connection = {
-    delegate.connect(translateUrl(url), properties)
+    val connection = delegate.connect(translateUrl(url), properties)
+    new TimeZonedSQLServerConnection(connection)
   }
 
   override def acceptsURL(url: String): Boolean = delegate.acceptsURL(translateUrl(url))
