@@ -2,6 +2,7 @@ FROM apache-ranger-builder AS builder
 FROM debian:stretch
 
 # Repository
+RUN apt-get clean
 RUN apt-get update
 
 # Tools
