@@ -1,0 +1,11 @@
+## Commands
+
+docker build -t apache-atlas-builder builder/
+
+docker build -t apache-atlas .
+
+docker run --privileged --hostname apache-atlas --name apache-atlas -p21000:21000 -it apache-atlas
+
+docker start apache-atlas
+
+docker exec -it apache-atlas /bin/bash
