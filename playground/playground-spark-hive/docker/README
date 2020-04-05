@@ -1,3 +1,6 @@
 Taken from https://github.com/big-data-europe/docker-hive
 
 docker-compose up
+
+cd STS
+docker build -t spark-thrift-server .
