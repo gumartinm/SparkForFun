@@ -4,24 +4,24 @@ FROM debian:stretch
 RUN apt-get update
 
 # Build tools
-RUN apt-get install -y build-essential=12.3
-RUN apt-get install -y openjdk-8-jdk=8u232-b09-1~deb9u1
-RUN apt-get install -y maven=3.3.9-4
-RUN apt-get install -y wget=1.18-5+deb9u3
-RUN apt-get install -y python=2.7.13-2
-RUN apt-get install -y git=1:2.11.0-3+deb9u4
+RUN apt-get install -y build-essential
+RUN apt-get install -y openjdk-8-jdk
+RUN apt-get install -y maven
+RUN apt-get install -y wget
+RUN apt-get install -y python
+RUN apt-get install -y git
 ENV JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
 # Build Ranger
 RUN mkdir -p /opt/download
 WORKDIR /opt/download/
-RUN wget -nv http://apache.rediris.es/ranger/1.2.0/apache-ranger-1.2.0.tar.gz -O apache-ranger-1.2.0.tar.gz
+RUN wget -nv http://apache.rediris.es/ranger/2.0.0/apache-ranger-2.0.0.tar.gz -O apache-ranger-2.0.0.tar.gz
 RUN mkdir -p /opt/build/ranger
-RUN tar -xf apache-ranger-1.2.0.tar.gz --strip-components 1 -C /opt/build/ranger
+RUN tar -xf apache-ranger-2.0.0.tar.gz --strip-components 1 -C /opt/build/ranger
 WORKDIR /opt/build/ranger
 RUN mvn -DskipTests=true -Dmaven.test.skip=true clean compile package install assembly:assembly
 RUN mkdir -p /opt/apache/ranger
-RUN tar -xf target/ranger-1.2.0-admin.tar.gz --strip-components 1 -C /opt/apache/ranger
+RUN tar -xf target/ranger-2.0.0-admin.tar.gz --strip-components 1 -C /opt/apache/ranger
 
 # Build Solr
 WORKDIR /opt/apache/ranger/contrib/solr_for_audit_setup/

@@ -9,12 +9,12 @@ RUN apt-get update
 RUN apt-get install -y net-tools
 RUN apt-get install -y python=2.7.13-2
 RUN apt-get install -y build-essential=12.3
-RUN apt-get install -y openjdk-8-jdk=8u232-b09-1~deb9u1
+RUN apt-get install -y openjdk-8-jdk
 ENV JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
 # PostgreSQL
-RUN apt-get install -y postgresql=9.6+181+deb9u2
-RUN apt-get install -y libpostgresql-jdbc-java=9.4.1212-1
+RUN apt-get install -y postgresql
+RUN apt-get install -y libpostgresql-jdbc-java
 
 # Solr user
 RUN useradd --no-log-init -r -d /opt/solr solr && \
