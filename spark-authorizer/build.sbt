@@ -4,9 +4,8 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 name := "spark-authorizer"
 
 resolvers += Resolver.mavenLocal
-// resolvers += "Hortonworks" at "https://repo.hortonworks.com/content/repositories/releases"
 
-val sparkVersion = "2.4.4"
+val sparkVersion = "2.4.5"
 
 // Logging
 libraryDependencies +="com.typesafe.scala-logging" %% "scala-logging" % "3.9.0"
@@ -18,12 +17,13 @@ libraryDependencies +="org.apache.spark" %% "spark-hive" % sparkVersion % Provid
 
 
 // Spark Authorizer (local build)
-// https://github.com/yaooqinn/spark-authorizer
-libraryDependencies += "yaooqinn" % "spark-authorizer" % "2.1.1" intransitive()
-libraryDependencies +=  "org.apache.ranger" % "ranger-hive-plugin" % "1.2.0" intransitive()
-libraryDependencies += "org.apache.ranger" % "ranger-plugins-common" % "1.2.0" intransitive()
-libraryDependencies += "org.apache.ranger" % "ranger-plugins-audit" % "1.2.0" intransitive()
-libraryDependencies += "org.apache.httpcomponents" % "httpcore" % "4.4.6" intransitive()
+// https://github.com/apache/submarine/blob/master/submarine-security/spark-security/
+libraryDependencies += "org.apache.submarine" % "submarine-spark-security" % "0.4.0-SNAPSHOT" % Provided
+libraryDependencies += "net.java.dev.jna" % "jna" % "5.2.0" % Provided
+libraryDependencies += "net.java.dev.jna" % "jna-platform" % "5.2.0" % Provided
+libraryDependencies += "org.apache.ranger" % "ranger-plugins-common" % "2.0.0" % Provided intransitive()
+libraryDependencies += "com.kstruct" % "gethostname4j" % "0.0.2" % Provided
+libraryDependencies += "com.sun.jersey" % "jersey-bundle" % "1.19.3" % Provided
 
 // Test
 libraryDependencies +="org.scalatest" %% "scalatest" % "3.0.5" % Test

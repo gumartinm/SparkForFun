@@ -20,27 +20,27 @@
 <configuration>
 
     <property>
-        <name>ranger.plugin.hive.policy.rest.url</name>
-        <value>http://ranger_server:6080</value>
+        <name>ranger.plugin.spark.policy.rest.url</name>
+        <value>http://localhost:6080</value>
     </property>
 
     <property>
-        <name>ranger.plugin.hive.service.name</name>
+        <name>ranger.plugin.spark.service.name</name>
         <value>ranger-knox-ha_hive</value>
     </property>
 
     <property>
-        <name>ranger.plugin.hive.policy.cache.dir</name>
-        <value>./spark-authorizer/cache/</value>de.example.playground.spark.authorizer
+        <name>ranger.plugin.spark.policy.cache.dir</name>
+        <value>./spark-authorizer/cache/</value>
     </property>
 
     <property>
-        <name>ranger.plugin.hive.policy.pollIntervalMs</name>
+        <name>ranger.plugin.spark.policy.pollIntervalMs</name>
         <value>5000</value>
     </property>
 
     <property>
-        <name>ranger.plugin.hive.policy.source.impl</name>
+        <name>ranger.plugin.spark.policy.source.impl</name>
         <value>org.apache.ranger.admin.client.RangerAdminRESTClient</value>
     </property>
 
