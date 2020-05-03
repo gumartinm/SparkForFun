@@ -19,11 +19,11 @@ libraryDependencies +="org.apache.spark" %% "spark-hive" % sparkVersion % Provid
 // Spark Authorizer (local build)
 // https://github.com/apache/submarine/blob/master/submarine-security/spark-security/
 libraryDependencies += "org.apache.submarine" % "submarine-spark-security" % "0.4.0-SNAPSHOT" % Provided
-libraryDependencies += "net.java.dev.jna" % "jna" % "5.2.0" % Provided
-libraryDependencies += "net.java.dev.jna" % "jna-platform" % "5.2.0" % Provided
-libraryDependencies += "org.apache.ranger" % "ranger-plugins-common" % "2.0.0" % Provided intransitive()
-libraryDependencies += "com.kstruct" % "gethostname4j" % "0.0.2" % Provided
-libraryDependencies += "com.sun.jersey" % "jersey-bundle" % "1.19.3" % Provided
+// libraryDependencies += "net.java.dev.jna" % "jna" % "5.2.0" % Provided
+// libraryDependencies += "net.java.dev.jna" % "jna-platform" % "5.2.0" % Provided
+// libraryDependencies += "org.apache.ranger" % "ranger-plugins-common" % "2.0.0" % Provided intransitive()
+// libraryDependencies += "com.kstruct" % "gethostname4j" % "0.0.2" % Provided
+// libraryDependencies += "com.sun.jersey" % "jersey-bundle" % "1.19.3" % Provided
 
 // Test
 libraryDependencies +="org.scalatest" %% "scalatest" % "3.0.5" % Test
