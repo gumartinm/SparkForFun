@@ -14,7 +14,9 @@ if [ ! -f "$FILE" ]; then
 fi
 
 # Run solr
-/opt/solr/ranger_audit_server/scripts/start_solr.sh
+# /opt/solr/ranger_audit_server/scripts/start_solr.sh
+export SOLR_INCLUDE=/opt/solr/ranger_audit_server/scripts/solr.in.sh
+/opt/solr/bin/solr start
 
 # Run Apache Ranger
 /opt/apache/ranger/ews/ranger-admin-services.sh start
