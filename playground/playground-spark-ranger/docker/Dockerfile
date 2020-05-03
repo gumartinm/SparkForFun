@@ -54,5 +54,5 @@ ADD scripts/entryproint.sh /
 # PostgreSQL: 5432
 EXPOSE 6080 6182 6083 5432
 
-CMD /bin/bash
-# ENTRYPOINT ["/entryproint.sh"]
+# CMD /bin/bash
+ENTRYPOINT ["/entryproint.sh"]
