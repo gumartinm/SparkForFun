@@ -44,4 +44,21 @@
         <value>org.apache.ranger.admin.client.RangerAdminRESTClient</value>
     </property>
 
+    <!--
+    <property>
+        <name>ranger.plugin.spark.policy.rest.url</name>
+        <value>https://localhost:6080</value>
+    </property>
+    -->
+    <property>
+        <name>ranger.service.store.rest.ssl.config.file</name>
+        <value>./sslconfig.xml</value>
+    </property>
+
+    <property>
+        <name>ranger.plugin.spark.policy.rest.ssl.config.file</name>
+        <value>./sslconfig.xml</value>
+    </property>
+
+
 </configuration>
