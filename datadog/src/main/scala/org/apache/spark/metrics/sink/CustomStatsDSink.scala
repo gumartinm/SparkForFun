@@ -8,7 +8,7 @@ import com.codahale.metrics.MetricRegistry
 import org.apache.spark.SecurityManager
 import org.apache.spark.internal.Logging
 import org.apache.spark.metrics.MetricsSystem
-import CustomStatsDSink._
+import org.apache.spark.metrics.sink.CustomStatsDSink._
 
 // Taken from:
 // https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/metrics/sink/StatsdSink.scala
