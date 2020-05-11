@@ -9,6 +9,8 @@ class CustomMetaStoreEventListenerTest extends SharedSparkSessionHelper {
   protected override def sparkConf: SparkConf = {
     val conf = super.sparkConf
     conf.set("hive.metastore.event.listeners", "de.example.playground.metastore.listeners.CustomMetaStoreEventListener")
+    conf.set("hive.metastore.end.function.listeners",
+             "de.example.playground.metastore.listeners.CustomMetaStoreEndFunctionListener")
   }
 
   it should "create table Hive using spark" in {
