@@ -7,9 +7,8 @@ class CustomStatsDSinkTest extends SharedSparkSessionHelper {
 
   protected override def sparkConf: SparkConf = {
     val conf = super.sparkConf
-    //conf.set("spark.hadoop.hive.metastore.uris", "thrift://192.168.0.214:9083,thrift://192.168.0.115:9083") // Connector does not work with embedded Hive
-    //conf.set("spark.sql.warehouse.dir", "/apps/hive/warehouse")
-    conf
+    // override default spark.app.id value in metrics :)
+    conf.set("spark.metrics.namespace", "DATADOG_TEST")
   }
 
   it should "create table Hive using spark ranger" in {
