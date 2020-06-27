@@ -9,10 +9,10 @@ class SparkRangerTest extends SharedSparkSessionHelper {
   protected override def sparkConf: SparkConf = {
     val conf = super.sparkConf
     conf.set("spark.sql.extensions", "org.apache.submarine.spark.security.api.RangerSparkSQLExtension")
-    conf.set("hive.security.authorization.enabled", "true")
+    //conf.set("hive.security.authorization.enabled", "true")
     //conf.set("hive.security.authorization.manager", "org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizerFactory")
     //conf.set("hive.security.authenticator.manager", "org.apache.hadoop.hive.ql.security.SessionStateUserAuthenticator")
-    conf.set("hive.conf.restricted.list", "hive.security.authorization.enabled,hive.security.authorization.manager,hive.security.authenticator.manager")
+    //conf.set("hive.conf.restricted.list", "hive.security.authorization.enabled,hive.security.authorization.manager,hive.security.authenticator.manager")
     //conf.set("spark.hadoop.hive.metastore.uris", "thrift://192.168.0.214:9083,thrift://192.168.0.115:9083") // Connector does not work with embedded Hive
     //conf.set("spark.sql.warehouse.dir", "/apps/hive/warehouse")
   }
