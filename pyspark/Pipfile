@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pytest = "==5.4.2"
+coverage = "==5.1"
+pycodestyle = "==2.6.0"
+pylint = "==2.5.2"
+
+[requires]
+python_version = "3.7"
+
+[packages]
+pyspark = "==2.4.5"
