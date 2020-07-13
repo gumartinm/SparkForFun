@@ -9,9 +9,9 @@ import uuid
 class SharedSparkSessionHelper:
 
     def __init__(self):
-        __random_UUID = uuid.uuid4().urn
-        self.__warehouse_path = Path("spark-warehouse", __random_UUID)
-        self.__metastore_path = Path("metastore_db", __random_UUID)
+        random_uuid = uuid.uuid4().urn
+        self.__warehouse_path = Path("spark-warehouse", random_uuid)
+        self.__metastore_path = Path("metastore_db", random_uuid)
         self.__spark = None
         self.path = None
 
