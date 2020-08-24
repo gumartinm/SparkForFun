@@ -5,20 +5,23 @@ import org.apache.spark.sql.types.{ArrayType, StructField, StructType}
 
 class AwesomeService {
 
-  def renameColumnsToUpperCase(schema: StructType): StructType = {
+  def renameColumnsToUpperCase(schema: StructType): StructType =
+    renameAllCols(schema, toUpperCase)
+
+  private def renameAllCols(schema: StructType, rename: String => String): StructType = {
 
     def recurRename(schema: StructType): Seq[StructField] =
       schema.fields
         .map {
-          case StructField(name, dtype: StructType, nullable, meta) =>
-            StructField(toUpperCase(name), StructType(recurRename(dtype)), nullable, meta)
+          case StructField(name, dataType: StructType, nullable, meta) =>
+            StructField(rename(name), StructType(recurRename(dataType)), nullable, meta)
 
-          case StructField(name, dtype: ArrayType, nullable, meta)
-            if dtype.elementType.isInstanceOf[StructType] =>
+          case StructField(name, dataType: ArrayType, nullable, meta)
+              if dataType.elementType.isInstanceOf[StructType] =>
             StructField(
-              toUpperCase(name),
+              rename(name),
               ArrayType(
-                StructType(recurRename(dtype.elementType.asInstanceOf[StructType])),
+                StructType(recurRename(dataType.elementType.asInstanceOf[StructType])),
                 nullable
               ),
               nullable,
@@ -26,7 +29,7 @@ class AwesomeService {
             )
 
           case StructField(name, dtype, nullable, meta) =>
-            StructField(toUpperCase(name), dtype, nullable, meta)
+            StructField(rename(name), dtype, nullable, meta)
         }
 
     StructType(recurRename(schema))
