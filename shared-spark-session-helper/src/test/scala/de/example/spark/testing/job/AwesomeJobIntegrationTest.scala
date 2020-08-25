@@ -40,8 +40,7 @@ class AwesomeJobIntegrationTest
     )
     when(awesomeService.renameColumnsToUpperCase(schema)).thenReturn(expectedSchema)
 
-    val awesomeJob = new AwesomeJob(sourcePath, destinationPath, awesomeService)
-    awesomeJob.run()
+    new AwesomeJob(sourcePath, destinationPath, awesomeService).run()
 
     val resultDataFrame = sparkSession.read.json(destinationPath)
     val expectedDataFrame = createExpectedDataFrame
