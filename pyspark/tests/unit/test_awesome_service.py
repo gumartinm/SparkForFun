@@ -50,7 +50,3 @@ class AwesomeServiceTest(unittest.TestCase):
         result_schema = service.rename_columns_to_upper_case(some_shema)
 
         self.assertEqual(expected_schema, result_schema)
-
-
-if __name__ == '__main__':
-    unittest.main()
