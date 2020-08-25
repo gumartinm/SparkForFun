@@ -43,7 +43,7 @@ class AwesomeJobIntegrationTest
     val awesomeJob = new AwesomeJob(sourcePath, destinationPath, awesomeService)
     awesomeJob.run()
 
-    val resultDataFrame = spark.read.json(destinationPath)
+    val resultDataFrame = sparkSession.read.json(destinationPath)
     val expectedDataFrame = createExpectedDataFrame
 
     verify(awesomeService, times(wantedNumberOfInvocations = 1)).renameColumnsToUpperCase(schema)
@@ -51,7 +51,7 @@ class AwesomeJobIntegrationTest
   }
 
   private def createExpectedDataFrame: DataFrame =
-    spark.createDataFrame(
+    sparkSession.createDataFrame(
       sparkContext.parallelize(
         Seq(
           Row("John", "Doe"),

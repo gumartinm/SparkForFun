@@ -21,7 +21,7 @@ trait SharedSparkSessionHelper extends AnyFlatSpec with BeforeAndAfterEach with 
 
   protected var path: String = _
 
-  protected implicit def spark: SparkSession = _spark
+  protected implicit def sparkSession: SparkSession = _spark
 
   protected def sparkContext: SparkContext = _spark.sparkContext
 
@@ -62,8 +62,8 @@ trait SharedSparkSessionHelper extends AnyFlatSpec with BeforeAndAfterEach with 
 
   protected override def afterEach(): Unit = {
     new Directory(new File(path)).deleteRecursively()
-    spark.sharedState.cacheManager.clearCache()
-    spark.sessionState.catalog.reset()
+    sparkSession.sharedState.cacheManager.clearCache()
+    sparkSession.sessionState.catalog.reset()
   }
 
   protected object testImplicits extends SQLImplicits {

@@ -22,13 +22,13 @@ class AwesomeAppEndToEndTest extends SharedSparkSessionHelper with DataFrameSuit
 
     AwesomeApp.main(args)
 
-    val resultDataFrame = spark.read.json(destinationPath)
+    val resultDataFrame = sparkSession.read.json(destinationPath)
     val expectedDataFrame = createExpectedDataFrame
     assertDataFrameEquals(expectedDataFrame, resultDataFrame)
   }
 
   private def createExpectedDataFrame: DataFrame =
-    spark.createDataFrame(
+    sparkSession.createDataFrame(
       sparkContext.parallelize(
         Seq(
           Row("John", "Doe"),
