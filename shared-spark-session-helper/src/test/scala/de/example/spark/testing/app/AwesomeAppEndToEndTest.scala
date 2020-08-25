@@ -16,8 +16,8 @@ class AwesomeAppEndToEndTest extends SharedSparkSessionHelper with DataFrameSuit
   }
 
   it should "run awesome app with success" in {
-    val sourcePath = getClass.getResource("/sourcepath/awesomejob/").toString
-    val destinationPath = path + "/destinationpath/awesomejob/"
+    val sourcePath = getClass.getResource("/awesomejob/sourcepath/").toString
+    val destinationPath = path + "/awesomejob/destinationpath/"
     val args = Array(sourcePath, destinationPath)
 
     AwesomeApp.main(args)

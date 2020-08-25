@@ -23,8 +23,8 @@ class AwesomeJobIntegrationTest
   }
 
   it should "run awesome job with success" in {
-    val sourcePath = getClass.getResource("/sourcepath/awesomejob/").toString
-    val destinationPath = path + "/destinationpath/awesomejob/"
+    val sourcePath = getClass.getResource("/awesomejob/sourcepath//").toString
+    val destinationPath = path + "/awesomejob/destinationpath/"
     val awesomeService = mock[AwesomeService]
     val schema = StructType(
       List(
