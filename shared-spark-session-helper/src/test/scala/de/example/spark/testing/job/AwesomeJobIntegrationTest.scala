@@ -42,7 +42,7 @@ class AwesomeJobIntegrationTest
 
     new AwesomeJob(sourcePath, destinationPath, awesomeService).run()
 
-    val resultDataFrame = sparkSession.read.json(destinationPath)
+    val resultDataFrame = sparkSession.sql("SELECT * FROM testing.example")
     val expectedDataFrame = createExpectedDataFrame
 
     verify(awesomeService, times(wantedNumberOfInvocations = 1)).renameColumnsToUpperCase(schema)
