@@ -19,14 +19,17 @@ class AwesomeJob(sourcePath: String, destinationPath: String, awesomeService: Aw
   def run(): Unit = {
     logger.info("Running AwesomeJob")
 
-    val schema = StructType(
-      Array(StructField("name", StringType), StructField("surname", StringType))
+    val jsonSchema = StructType(
+      Array(
+        StructField("name", StringType),
+        StructField("surname", StringType)
+      )
     )
-    val jsonDataFrame = sparkSession.read.schema(schema).json(sourcePath)
-    val jsonSchema = jsonDataFrame.schema
+    val dataFrame = sparkSession.read.schema(jsonSchema).json(sourcePath)
+    val schema = dataFrame.schema
 
-    val upperCaseJsonSchema = awesomeService.renameColumnsToUpperCase(jsonSchema)
-    val upperCaseJsonDataFrame = sparkSession.createDataFrame(jsonDataFrame.rdd, upperCaseJsonSchema)
+    val upperCaseSchema = awesomeService.renameColumnsToUpperCase(schema)
+    val upperCaseDataFrame = sparkSession.createDataFrame(dataFrame.rdd, upperCaseSchema)
 
     sparkSession.sql(s"CREATE DATABASE IF NOT EXISTS $Database")
     sparkSession.sql(s"""
@@ -36,7 +39,7 @@ class AwesomeJob(sourcePath: String, destinationPath: String, awesomeService: Aw
                         |  path '$destinationPath'
                         |)
                         |""".stripMargin)
-    upperCaseJsonDataFrame.write
+    upperCaseDataFrame.write
       .mode(SaveMode.Overwrite)
       .insertInto(s"$Database.$Table")
 
