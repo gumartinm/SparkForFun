@@ -52,6 +52,7 @@ trait SharedSparkSessionHelper extends AnyFlatSpec with BeforeAndAfterEach with 
       .enableHiveSupport()
       .getOrCreate()
   }
+
   protected override def afterAll(): Unit = {
     cleanUpSparkSession()
   }
