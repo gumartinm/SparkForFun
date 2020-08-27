@@ -20,12 +20,12 @@ def path():
 
 
 @pytest.fixture(scope='function')
-def spark_session_after_each(spark_session):
+def spark_session_after_each(spark_session):  # pylint: disable=W0621
 
     yield spark_session
 
     # After each
-    jvm_session = spark_session._jvm.SparkSession.getActiveSession().get()
+    jvm_session = spark_session._jvm.SparkSession.getActiveSession().get()   # pylint: disable=W0212
     jvm_session.sharedState().cacheManager().clearCache()
     jvm_session.sessionState().catalog().reset()
 
@@ -60,7 +60,7 @@ def spark_session():
 
     # After All
     current_spark_session.stop()
-    jvm_session = current_spark_session._jvm.SparkSession.getActiveSession().get()
+    jvm_session = current_spark_session._jvm.SparkSession.getActiveSession().get()   # pylint: disable=W0212
     jvm_session.clearActiveSession()
     jvm_session.clearDefaultSession()
     shutil.rmtree(path=warehouse_path, ignore_errors=True)

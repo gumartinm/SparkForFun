@@ -3,9 +3,9 @@ import os
 import mock
 import pytest
 from app.awesome_job import AwesomeJob
-from pyspark.sql import Row
 from pyspark.sql.types import StringType, StructField, StructType
 
+from tests.commons import create_expected_data_frame, UPPER_CASE_SCHEMA
 from tests.sparktestingbase.sqltestcase import SQLTestCase
 
 FIXTURES_DIR = os.path.join(
@@ -28,27 +28,7 @@ def test_run_awesome_job_with_success(spark_session, spark_session_after_each, d
             StructField("surname", StringType())
         ]
     )
-    expected_schema = StructType(
-        [
-            StructField("NAME", StringType()),
-            StructField("SURNAME", StringType())
-        ]
-    )
-
-    def create_expected_data_frame():
-        return spark_session.createDataFrame(
-            spark_session.sparkContext.parallelize(
-                [
-                    Row("John", "Doe"),
-                    Row("Jane", "Doe")
-                ]),
-            StructType(
-                [
-                    StructField("NAME", StringType()),
-                    StructField("SURNAME", StringType())
-                ]
-            )
-        )
+    expected_schema = UPPER_CASE_SCHEMA
 
     with mock.patch('app.awesome_service.AwesomeService', autospec=True) as service_mock:
         service = service_mock.return_value
@@ -56,7 +36,7 @@ def test_run_awesome_job_with_success(spark_session, spark_session_after_each, d
         AwesomeJob(source_path, destination_path, spark_session, service).run()
 
         result_data_frame = spark_session.sql("SELECT * FROM testing.example")
-        expected_data_frame = create_expected_data_frame()
+        expected_data_frame = create_expected_data_frame(spark_session)
 
         service.rename_columns_to_upper_case.assert_called_once_with(schema)
         data_frame_suite = SQLTestCase()
