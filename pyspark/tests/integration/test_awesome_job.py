@@ -6,7 +6,7 @@ from app.awesome_job import AwesomeJob
 from pyspark.sql.types import StringType, StructField, StructType
 
 from tests.commons import create_expected_data_frame, UPPER_CASE_SCHEMA
-from tests.sparktestingbase.sqltestcase import SQLTestCase
+from tests.holdenkarau.sqltestcase import SQLTestCase
 
 FIXTURES_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),

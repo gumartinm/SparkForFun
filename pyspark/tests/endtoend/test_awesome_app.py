@@ -5,7 +5,7 @@ import pytest
 from app.awesome_app import run
 
 from tests.commons import create_expected_data_frame
-from tests.sparktestingbase.sqltestcase import SQLTestCase
+from tests.holdenkarau.sqltestcase import SQLTestCase
 
 FIXTURES_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
