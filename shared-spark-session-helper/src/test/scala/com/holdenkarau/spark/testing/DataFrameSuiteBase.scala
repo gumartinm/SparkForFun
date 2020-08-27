@@ -21,6 +21,7 @@
  * Taken from: https://github.com/holdenk/spark-testing-base/blob/49b7c5bba382bf06fea9d638f675a92ac7e3ee4f/
  *             core/src/main/2.0/scala/com/holdenkarau/spark/testing/DataFrameSuiteBase.scala
  */
+
 package com.holdenkarau.spark.testing
 
 import java.sql.Timestamp
