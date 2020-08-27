@@ -48,6 +48,8 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+report.html
+assets/
 
 # Translations
 *.mo
