@@ -1,9 +1,9 @@
+import shutil
 import tempfile
 import uuid
 from pathlib import Path
 
 import pytest
-import shutil
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
@@ -11,12 +11,12 @@ from pyspark.sql import SparkSession
 @pytest.fixture(scope='function')
 def path():
     # Before each
-    path = tempfile.TemporaryDirectory()
+    temporary_path = tempfile.TemporaryDirectory()
 
-    yield Path(path.name)
+    yield Path(temporary_path.name)
 
     # After each
-    path.cleanup()
+    temporary_path.cleanup()
 
 
 @pytest.fixture(scope='function')
@@ -48,7 +48,7 @@ def spark_session():
         .set("javax.jdo.option.ConnectionURL",
              "jdbc:derby:;databaseName={0};create=true".format(str(metastore_path.absolute())))
 
-    spark_session = SparkSession \
+    current_spark_session = SparkSession \
         .builder \
         .master("local[2]") \
         .appName("test-sql-context") \
@@ -56,11 +56,11 @@ def spark_session():
         .enableHiveSupport() \
         .getOrCreate()
 
-    yield spark_session
+    yield current_spark_session
 
     # After All
-    spark_session.stop()
-    jvm_session = spark_session._jvm.SparkSession.getActiveSession().get()
+    current_spark_session.stop()
+    jvm_session = current_spark_session._jvm.SparkSession.getActiveSession().get()
     jvm_session.clearActiveSession()
     jvm_session.clearDefaultSession()
     shutil.rmtree(path=warehouse_path, ignore_errors=True)

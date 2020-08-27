@@ -42,5 +42,6 @@ class AwesomeJob:
 
     @staticmethod
     def __logger(spark_session):
+        # pylint: disable=W0212
         log4j_logger = spark_session.sparkContext._jvm.org.apache.log4j
         return log4j_logger.LogManager.getLogger(__name__)

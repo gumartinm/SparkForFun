@@ -19,6 +19,8 @@ ignore-patterns=
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
 #init-hook=
+init-hook="import imp, os; from pylint.config import find_pylintrc; imp.load_source('pylintrc_hook', os.path.join(os.path.dirname(find_pylintrc()), 'pylintrc_hook.py'))"
+#init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.
@@ -138,7 +140,11 @@ disable=print-statement,
         xreadlines-attribute,
         deprecated-sys-function,
         exception-escape,
-        comprehension-escape
+        comprehension-escape,
+        C0114,
+        C0115,
+        C0116,
+        R0903
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -220,7 +226,7 @@ indent-after-paren=4
 indent-string='    '
 
 # Maximum number of characters on a single line.
-max-line-length=100
+max-line-length=160
 
 # Maximum number of lines in a module.
 max-module-lines=1000

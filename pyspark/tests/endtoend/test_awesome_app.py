@@ -1,8 +1,8 @@
 import os
+from collections import namedtuple
 
 import pytest
 from app.awesome_app import run
-from collections import namedtuple
 from pyspark.sql import Row
 from pyspark.sql.types import StructField, StringType, StructType
 

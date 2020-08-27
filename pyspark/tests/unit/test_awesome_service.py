@@ -3,7 +3,7 @@ from app.awesome_service import AwesomeService
 from pyspark.sql.types import StructType, StringType, StructField, ArrayType
 
 
-def test_rename_columns_to_upper_case(self):
+def test_rename_columns_to_upper_case():
     service = AwesomeService()
     some_shema = StructType(
         [

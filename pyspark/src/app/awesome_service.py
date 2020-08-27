@@ -17,7 +17,8 @@ class AwesomeService:
             if isinstance(field.dataType, StructType):
                 return StructField(rename(field.name), StructType(recur_rename(field.dataType)), field.nullable,
                                    field.metadata)
-            elif isinstance(field.dataType, ArrayType) and isinstance(field.dataType.elementType, StructType):
+
+            if isinstance(field.dataType, ArrayType) and isinstance(field.dataType.elementType, StructType):
                 return StructField(
                     rename(field.name),
                     ArrayType(
@@ -27,8 +28,8 @@ class AwesomeService:
                     field.nullable,
                     field.metadata
                 )
-            else:
-                return StructField(rename(field.name), field.dataType, field.nullable, field.metadata)
+
+            return StructField(rename(field.name), field.dataType, field.nullable, field.metadata)
 
         return StructType(recur_rename(schema))
 
