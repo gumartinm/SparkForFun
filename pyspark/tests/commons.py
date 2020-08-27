@@ -1,3 +1,4 @@
+# Author: Gustavo Martin Morcuende
 from pyspark.sql import Row
 from pyspark.sql.types import StructType, StructField, StringType
 

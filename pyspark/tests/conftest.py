@@ -1,3 +1,4 @@
+# Author: Gustavo Martin Morcuende
 import shutil
 import tempfile
 import uuid

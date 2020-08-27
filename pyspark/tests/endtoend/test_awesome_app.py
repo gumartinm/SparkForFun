@@ -1,3 +1,4 @@
+# Author: Gustavo Martin Morcuende
 import os
 from collections import namedtuple
 
