@@ -8,18 +8,29 @@ from pyspark import SparkConf
 from pyspark.sql import SparkSession
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def path():
     # Before each
     path = tempfile.TemporaryDirectory()
 
-    yield path.name
+    yield Path(path.name)
 
     # After each
     path.cleanup()
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
+def spark_session_after_each(spark_session):
+
+    yield spark_session
+
+    # After each
+    jvm_session = spark_session._jvm.SparkSession.getActiveSession().get()
+    jvm_session.sharedState().cacheManager().clearCache()
+    jvm_session.sessionState().catalog().reset()
+
+
+@pytest.fixture(scope='class')
 def spark_session():
     # Before All
     shutil.rmtree(path=Path("spark-warehouse"), ignore_errors=True)
@@ -47,13 +58,9 @@ def spark_session():
 
     yield spark_session
 
-    # After each
-    jvm_session = spark_session._jvm.SparkSession.getActiveSession().get()  # cuidado, get puede que no devuelva nada si el test falló :/
-    jvm_session.sharedState().cacheManager().clearCache()
-    jvm_session.sessionState().catalog().reset()
-
     # After All
     spark_session.stop()
+    jvm_session = spark_session._jvm.SparkSession.getActiveSession().get()
     jvm_session.clearActiveSession()
     jvm_session.clearDefaultSession()
     shutil.rmtree(path=warehouse_path, ignore_errors=True)

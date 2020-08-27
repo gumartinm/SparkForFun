@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "55cf87f494fffd460e0378b48f63ebe7d90be7ea623174f575ece64d80bee35a"
+            "sha256": "48b02d54fe793af942e5f1fc70ccc659e1260f83a2ba03c1b8d353f3de40b9de"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -140,6 +140,14 @@
             ],
             "version": "==0.6.1"
         },
+        "mock": {
+            "hashes": [
+                "sha256:3f9b2c0196c60d21838f307f5825a7b86b678cedc58ab9e50a8988187b4d81e0",
+                "sha256:dd33eb70232b6118298d516bbcecd26704689c386594f0f3c4f13867b2c56f72"
+            ],
+            "index": "pypi",
+            "version": "==4.0.2"
+        },
         "more-itertools": {
             "hashes": [
                 "sha256:68c70cc7167bdf5c7c9d8f6954a7837089c6a36bf565383919bb595efb8a17e5",
@@ -214,6 +222,14 @@
             ],
             "index": "pypi",
             "version": "==2.0"
+        },
+        "pytest-mock": {
+            "hashes": [
+                "sha256:024e405ad382646318c4281948aadf6fe1135632bea9cc67366ea0c4098ef5f2",
+                "sha256:a4d6d37329e4a893e77d9ffa89e838dd2b45d5dc099984cf03c703ac8411bb82"
+            ],
+            "index": "pypi",
+            "version": "==3.3.1"
         },
         "six": {
             "hashes": [
