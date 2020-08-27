@@ -2,18 +2,11 @@ import os
 
 import pytest
 from app.awesome_app import run
+from collections import namedtuple
 from pyspark.sql import Row
 from pyspark.sql.types import StructField, StringType, StructType
 
 from tests.sparktestingbase.sqltestcase import SQLTestCase
-
-
-class ParsedArgs:
-
-    def __init__(self, source, destination):
-        self.source = source
-        self.destination = destination
-
 
 
 FIXTURES_DIR = os.path.join(
@@ -45,6 +38,7 @@ def test_run_awesome_app_with_success(spark_session, spark_session_after_each, d
             )
         )
 
+    ParsedArgs = namedtuple('ParsedArgs', 'source destination')
     parsed_args = ParsedArgs(source_path, destination_path)
     run(parsed_args)
 
