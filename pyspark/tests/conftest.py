@@ -32,7 +32,7 @@ def spark_session_after_each(spark_session):  # pylint: disable=W0621
 
 
 @pytest.fixture(scope='class')
-def spark_session():
+def spark_session(spark_custom_confs):
     # Before All
     shutil.rmtree(path=Path("spark-warehouse"), ignore_errors=True)
     shutil.rmtree(path=Path("metastore_db"), ignore_errors=True)
