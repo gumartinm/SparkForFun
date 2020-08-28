@@ -7,6 +7,7 @@ from awesome.job.awesome_job import AwesomeJob
 from pyspark.sql.types import StringType, StructField, StructType
 
 from tests.commons import create_expected_data_frame, UPPER_CASE_SCHEMA
+from tests.conftest import SparkCustomConf, SPARK_CUSTOM_CONFS
 from tests.holdenkarau.sqltestcase import SQLTestCase
 
 FIXTURES_DIR = os.path.join(
@@ -19,7 +20,9 @@ FIXTURES_DIR = os.path.join(
     os.path.join(FIXTURES_DIR, 'awesomejob', 'sourcepath'),
     keep_top_dir=True
 )
-@pytest.mark.parametrize('spark_custom_confs', [['var1', 'var2']], scope='class')
+@pytest.mark.parametrize(SPARK_CUSTOM_CONFS,
+                         [[SparkCustomConf('spark.sql.sources.partitionOverwriteMode', 'dynamic')]],
+                         scope='class')
 class TestAwesomeJob:
 
     def test_run_awesome_job_with_success(self, spark_session, spark_session_after_each, datafiles, path):

@@ -2,6 +2,7 @@
 import shutil
 import tempfile
 import uuid
+from collections import namedtuple
 from pathlib import Path
 
 import pytest
@@ -31,6 +32,11 @@ def spark_session_after_each(spark_session):  # pylint: disable=W0621
     jvm_session.sessionState().catalog().reset()
 
 
+SparkCustomConf = namedtuple('CustomConf', 'key value')
+
+SPARK_CUSTOM_CONFS = 'spark_custom_confs'
+
+
 @pytest.fixture(scope='class')
 def spark_session(spark_custom_confs):
     # Before All
@@ -48,6 +54,9 @@ def spark_session(spark_custom_confs):
         .set("spark.sql.warehouse.dir", str(warehouse_path.absolute())) \
         .set("javax.jdo.option.ConnectionURL",
              "jdbc:derby:;databaseName={0};create=true".format(str(metastore_path.absolute())))
+
+    for spark_custom_conf in spark_custom_confs:
+        spark_conf.set(spark_custom_conf.key, spark_custom_conf.value)
 
     current_spark_session = SparkSession \
         .builder \

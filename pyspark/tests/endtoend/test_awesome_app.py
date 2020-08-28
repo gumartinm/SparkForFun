@@ -6,6 +6,7 @@ import pytest
 from awesome.app.awesome_app import run
 
 from tests.commons import create_expected_data_frame
+from tests.conftest import SPARK_CUSTOM_CONFS
 from tests.holdenkarau.sqltestcase import SQLTestCase
 
 FIXTURES_DIR = os.path.join(
@@ -18,7 +19,9 @@ FIXTURES_DIR = os.path.join(
     os.path.join(FIXTURES_DIR, 'awesomeapp', 'sourcepath'),
     keep_top_dir=True
 )
-@pytest.mark.parametrize('spark_custom_confs', [[]], scope='class')
+@pytest.mark.parametrize(SPARK_CUSTOM_CONFS,
+                         [[]],
+                         scope='class')
 class TestAwesomeApp:
 
     def test_run_awesome_app_with_success(self, spark_session, spark_session_after_each, datafiles, path):
