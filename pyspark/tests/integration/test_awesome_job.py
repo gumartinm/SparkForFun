@@ -28,8 +28,8 @@ class TestAwesomeJob:
         destination_path = path / 'destinationpath/awesomejob/'
         schema = StructType(
             [
-                StructField("name", StringType()),
-                StructField("surname", StringType())
+                StructField('name', StringType()),
+                StructField('surname', StringType())
             ]
         )
         expected_schema = UPPER_CASE_SCHEMA
@@ -39,7 +39,7 @@ class TestAwesomeJob:
             service.rename_columns_to_upper_case.return_value = expected_schema
             AwesomeJob(source_path, destination_path, spark_session, service).run()
 
-            result_data_frame = spark_session.sql("SELECT * FROM testing.example")
+            result_data_frame = spark_session.sql('SELECT * FROM testing.example')
             expected_data_frame = create_expected_data_frame(spark_session)
 
             service.rename_columns_to_upper_case.assert_called_once_with(schema)
@@ -52,8 +52,8 @@ class TestAwesomeJob:
         destination_path = path / 'destinationpath/awesomejob/'
         schema = StructType(
             [
-                StructField("name", StringType()),
-                StructField("surname", StringType())
+                StructField('name', StringType()),
+                StructField('surname', StringType())
             ]
         )
         expected_schema = UPPER_CASE_SCHEMA
@@ -63,7 +63,7 @@ class TestAwesomeJob:
             service.rename_columns_to_upper_case.return_value = expected_schema
             AwesomeJob(source_path, destination_path, spark_session, service).run()
 
-            result_data_frame = spark_session.sql("SELECT * FROM testing.example")
+            result_data_frame = spark_session.sql('SELECT * FROM testing.example')
             expected_data_frame = create_expected_data_frame(spark_session)
 
             service.rename_columns_to_upper_case.assert_called_once_with(schema)

@@ -29,7 +29,7 @@ class TestAwesomeApp:
         parsed_args = ParsedArgs(source_path, destination_path)
         run(parsed_args)
 
-        result_data_frame = spark_session.sql("SELECT * FROM testing.example")
+        result_data_frame = spark_session.sql('SELECT * FROM testing.example')
         expected_data_frame = create_expected_data_frame(spark_session)
 
         data_frame_suite = SQLTestCase()

@@ -14,12 +14,12 @@ class AwesomeJob:
         self.logger = AwesomeJob.__logger(spark_session)
 
     def run(self):
-        self.logger.info("Running AwesomeJob")
+        self.logger.info('Running AwesomeJob')
 
         json_schema = StructType(
             [
-                StructField("name", StringType()),
-                StructField("surname", StringType())
+                StructField('name', StringType()),
+                StructField('surname', StringType())
             ]
         )
         data_frame = self.spark_session.read.schema(json_schema).json(path=self.source_path)
@@ -36,10 +36,10 @@ class AwesomeJob:
             f'path \'{self.destination_path}\' '
             f')')
         upper_case_data_frame.write \
-            .mode("overwrite") \
+            .mode('overwrite') \
             .insertInto(f'{AwesomeJob.__DATABASE}.{AwesomeJob.__TABLE}')
 
-        self.logger.info("End running AwesomeJob")
+        self.logger.info('End running AwesomeJob')
 
     @staticmethod
     def __logger(spark_session):

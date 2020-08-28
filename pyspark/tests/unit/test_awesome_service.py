@@ -11,38 +11,38 @@ class TestAwesomeService:
         some_shema = StructType(
             [
                 StructField(
-                    "Level1ColumnA",
+                    'Level1ColumnA',
                     StructType(
                         [
                             StructField(
-                                "Level2ColumnA",
+                                'Level2ColumnA',
                                 StructType(
-                                    [StructField("Level3ColumnA", StringType())]
+                                    [StructField('Level3ColumnA', StringType())]
                                 )
                             )
                         ]
                     )
                 ),
-                StructField("Level1ColumnB", ArrayType(StringType()))
+                StructField('Level1ColumnB', ArrayType(StringType()))
             ]
         )
 
         expected_schema = StructType(
             [
                 StructField(
-                    "LEVEL1COLUMNA",
+                    'LEVEL1COLUMNA',
                     StructType(
                         [
                             StructField(
-                                "LEVEL2COLUMNA",
+                                'LEVEL2COLUMNA',
                                 StructType(
-                                    [StructField("LEVEL3COLUMNA", StringType())]
+                                    [StructField('LEVEL3COLUMNA', StringType())]
                                 )
                             )
                         ]
                     )
                 ),
-                StructField("LEVEL1COLUMNB", ArrayType(StringType()))
+                StructField('LEVEL1COLUMNB', ArrayType(StringType()))
             ]
         )
 
