@@ -3,7 +3,7 @@ import os
 
 import mock
 import pytest
-from app.awesome_job import AwesomeJob
+from awesome.job.awesome_job import AwesomeJob
 from pyspark.sql.types import StringType, StructField, StructType
 
 from tests.commons import create_expected_data_frame, UPPER_CASE_SCHEMA
@@ -34,7 +34,7 @@ class TestAwesomeJob:
         )
         expected_schema = UPPER_CASE_SCHEMA
 
-        with mock.patch('app.awesome_service.AwesomeService', autospec=True) as service_mock:
+        with mock.patch('awesome.service.awesome_service.AwesomeService', autospec=True) as service_mock:
             service = service_mock.return_value
             service.rename_columns_to_upper_case.return_value = expected_schema
             AwesomeJob(source_path, destination_path, spark_session, service).run()
@@ -58,7 +58,7 @@ class TestAwesomeJob:
         )
         expected_schema = UPPER_CASE_SCHEMA
 
-        with mock.patch('app.awesome_service.AwesomeService', autospec=True) as service_mock:
+        with mock.patch('awesome.service.awesome_service.AwesomeService', autospec=True) as service_mock:
             service = service_mock.return_value
             service.rename_columns_to_upper_case.return_value = expected_schema
             AwesomeJob(source_path, destination_path, spark_session, service).run()

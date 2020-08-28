@@ -3,7 +3,7 @@ import os
 from collections import namedtuple
 
 import pytest
-from app.awesome_app import run
+from awesome.app.awesome_app import run
 
 from tests.commons import create_expected_data_frame
 from tests.holdenkarau.sqltestcase import SQLTestCase

@@ -3,8 +3,8 @@ import argparse
 
 from pyspark.sql import SparkSession
 
-from app.awesome_job import AwesomeJob
-from app.awesome_service import AwesomeService
+from awesome.job.awesome_job import AwesomeJob
+from awesome.service.awesome_service import AwesomeService
 
 
 def run(parsed_args):

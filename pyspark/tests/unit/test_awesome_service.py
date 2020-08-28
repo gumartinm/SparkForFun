@@ -1,5 +1,5 @@
 # Author: Gustavo Martin Morcuende
-from app.awesome_service import AwesomeService
+from awesome.service.awesome_service import AwesomeService
 
 from pyspark.sql.types import StructType, StringType, StructField, ArrayType
 
