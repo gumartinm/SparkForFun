@@ -6,8 +6,8 @@ import pytest
 from awesome.app.awesome_app import run
 
 from tests.commons import create_expected_data_frame
-from tests.conftest import SPARK_CUSTOM_CONFS
 from tests.holdenkarau.sqltestcase import SQLTestCase
+from tests.shared_spark_session_helper import SharedSparkSessionHelper
 
 FIXTURES_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -19,21 +19,18 @@ FIXTURES_DIR = os.path.join(
     os.path.join(FIXTURES_DIR, 'awesomeapp', 'sourcepath'),
     keep_top_dir=True
 )
-@pytest.mark.parametrize(SPARK_CUSTOM_CONFS,
-                         [[]],
-                         scope='class')
-class TestAwesomeApp:
+class TestAwesomeApp(SharedSparkSessionHelper):
 
-    def test_run_awesome_app_with_success(self, spark_session, spark_session_after_each, datafiles, path):
+    def test_run_awesome_app_with_success(self, datafiles):
         source_path = str(datafiles.listdir()[0])
-        destination_path = path / 'destinationpath/awesomeapp/'
+        destination_path = self.path / 'destinationpath/awesomeapp/'
 
         ParsedArgs = namedtuple('ParsedArgs', 'source destination')
         parsed_args = ParsedArgs(source_path, destination_path)
         run(parsed_args)
 
-        result_data_frame = spark_session.sql('SELECT * FROM testing.example')
-        expected_data_frame = create_expected_data_frame(spark_session)
+        result_data_frame = self.spark_session.sql('SELECT * FROM testing.example')
+        expected_data_frame = create_expected_data_frame(self.spark_session)
 
         data_frame_suite = SQLTestCase()
         data_frame_suite.assertDataFrameEqual(expected=expected_data_frame, result=result_data_frame, tol=0)
