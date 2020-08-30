@@ -38,6 +38,7 @@ FIXTURES_DIR = os.path.join(
 )
 class TestAwesomeJob(SharedSparkSessionHelper):
 
+    # Each set of tests may run with its own Spark configuration in an isolated way.
     @classmethod
     def spark_conf(cls):
         conf = super().spark_conf()
