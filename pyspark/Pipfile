@@ -19,4 +19,4 @@ pylintfileheader = "==0.1.0"
 python_version = "3.7"
 
 [packages]
-pyspark = "==2.4.5"
+pyspark = "==3.2.2"
